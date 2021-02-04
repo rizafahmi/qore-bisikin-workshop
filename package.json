@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@feedloop/qore-client": "0.1.25",
-    "@feedloop/qore-react": "0.1.25",
+    "@feedloop/qore-client": "^0.1.25",
+    "@feedloop/qore-react": "^0.1.25",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.3",
@@ -36,8 +36,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
   },
   "devDependencies": {
     "@feedloop/qore-cli": "0.1.23"
+||||||| merged common ancestors
+=======
+  },
+  "devDependencies": {
+    "@feedloop/qore-cli": "^0.1.23"
+>>>>>>> Install qore libraries
   }
 }
