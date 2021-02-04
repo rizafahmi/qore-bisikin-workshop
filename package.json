@@ -36,15 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
-  },
-  "devDependencies": {
-    "@feedloop/qore-cli": "0.1.23"
-||||||| merged common ancestors
-=======
   },
   "devDependencies": {
     "@feedloop/qore-cli": "^0.1.23"
->>>>>>> Install qore libraries
   }
 }
