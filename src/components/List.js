@@ -6,7 +6,7 @@ function List({ feedbacks }) {
         {status === "success" &&
           data.map(function (feedback) {
             return (
-              <li className="list-li">
+              <li className="list-li" key={feedback.id}>
                 <div className="list-li-container">
                   <p className="list-title">{feedback.title}</p>
                   <p className={`list-status ${feedback.status.toLowerCase()}`}>
