@@ -1,34 +1,22 @@
-function List() {
+function List({ feedbacks }) {
+  const { data, status } = feedbacks;
   return (
     <div className="list">
       <ul className="list-ul">
-        <li className="list-li">
-          <div className="list-li-container">
-            <p className="list-title">Version history for projects</p>
-            <p className="list-status progress">IN PROGRESS</p>
-            <p className="list-description">
-              Ini adalah teks contoh untuk latihan tailwind
-            </p>
-          </div>
-        </li>
-        <li className="list-li">
-          <div className="list-li-container">
-            <p className="list-title">Share projecct with selected people</p>
-            <p className="list-status icebox">ICEBOX</p>
-            <p className="list-description">
-              Ini adalah teks contoh untuk latihan tailwind
-            </p>
-          </div>
-        </li>
-        <li className="list-li">
-          <div className="list-li-container">
-            <p className="list-title">Sort people by recently active</p>
-            <p className="list-status done">DONE</p>
-            <p className="text-sm font-normal text-gray-600">
-              Ini adalah teks contoh untuk latihan tailwind
-            </p>
-          </div>
-        </li>
+        {status === "success" &&
+          data.map(function (feedback) {
+            return (
+              <li className="list-li">
+                <div className="list-li-container">
+                  <p className="list-title">{feedback.title}</p>
+                  <p className={`list-status ${feedback.status.toLowerCase()}`}>
+                    {feedback.status}
+                  </p>
+                  <p className="list-description">{feedback.description}</p>
+                </div>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );
