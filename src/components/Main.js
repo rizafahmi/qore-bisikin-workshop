@@ -7,7 +7,7 @@ function Main() {
   return (
     <div className="outbox">
       <div className="innerbox">
-        <Form />
+        <Form feedbacks={feedbacks} />
         <List feedbacks={feedbacks} />
       </div>
     </div>

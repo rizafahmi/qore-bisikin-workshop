@@ -1,10 +1,11 @@
 import { useState } from "react";
 import qoreContext from "../qoreContext.js";
 
-function Form() {
+function Form({ feedbacks }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { insertRow } = qoreContext.view("allFeedback").useInsertRow();
+  const { revalidate } = feedbacks;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -14,6 +15,7 @@ function Form() {
     // reset form
     setTitle("");
     setDescription("");
+    revalidate();
   }
 
   return (
