@@ -6,10 +6,9 @@ import Template from "./Template.js";
 function Detail() {
   const { id } = useParams();
   const { data, status } = qoreContext.view("allFeedback").useGetRow(id);
-  const { comments } = qoreContext.view("commentsByFeedback").useListRow({
-    feedbackId: id, // 80f7ddc8-5b67-4833-8135-32206b518c71
+  const { data: comments } = qoreContext.view("commentsByFeedback").useListRow({
+    feedbackId: id,
   });
-  console.log(qoreContext.view("commentsByFeedback").useListRow());
   return (
     <Template>
       <div className="detail-box">
@@ -21,14 +20,20 @@ function Detail() {
             </div>
             <div className="comment-box">
               <ul className="comment-box-devider">
-                <li className="comment-box-padded">
-                  <div className="comment-box-padded-space">
-                    <img
-                      src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </div>
-                </li>
+                {comments &&
+                  comments.map(function (comment) {
+                    return (
+                      <li className="comment-box-padded" key={comment.id}>
+                        <div className="comment-box-padded-space">
+                          <img
+                            src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
+                            alt=""
+                          />
+                          <p>{comment.body}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
           </>
