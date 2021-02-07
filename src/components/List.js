@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 function List({ feedbacks }) {
   const { data, status } = feedbacks;
+  console.log(data);
   return (
     <div className="list">
       <ul className="list-ul">
@@ -16,6 +17,11 @@ function List({ feedbacks }) {
                   <p className={`list-status ${feedback.status.toLowerCase()}`}>
                     {feedback.status}
                   </p>
+                  {feedback.commentNo > 0 && (
+                    <span className="list-comment-badge">
+                      {feedback.commentNo} comment(s)
+                    </span>
+                  )}
                   <p className="list-description">{feedback.description}</p>
                 </div>
               </li>
