@@ -5,10 +5,13 @@ import Template from "./Template.js";
 
 function Detail() {
   const { id } = useParams();
-  const { data, status } = qoreContext.view("allFeedback").useGetRow(id);
+  const { data, status, revalidate } = qoreContext
+    .view("allFeedback")
+    .useGetRow(id);
   const { data: comments } = qoreContext.view("commentsByFeedback").useListRow({
     feedbackId: id,
   });
+  const { action } = qoreContext.view("allFeedback").useActions(id);
   return (
     <Template>
       <div className="detail-box">
@@ -16,6 +19,9 @@ function Detail() {
           <>
             <div className="detail-box-title">
               <h3 className="detail-box-title-header">{data.title}</h3>
+              <p className={`list-status ${data.status.toLowerCase()}`}>
+                {data.status}
+              </p>
               <p>{data.description}</p>
             </div>
             <div className="comment-box">
@@ -36,6 +42,18 @@ function Detail() {
                   })}
               </ul>
             </div>
+            <button
+              disabled={data.status === "DONE"}
+              className={
+                data.status === "DONE" ? "button-disabled" : "button-finish"
+              }
+              onClick={async () => {
+                await action("setAsDone").trigger();
+                await revalidate();
+              }}
+            >
+              ✔ Selesai
+            </button>
           </>
         )}
         <Link to="/">
