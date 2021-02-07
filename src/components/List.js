@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function List({ feedbacks }) {
   const { data, status } = feedbacks;
   return (
@@ -8,7 +10,9 @@ function List({ feedbacks }) {
             return (
               <li className="list-li" key={feedback.id}>
                 <div className="list-li-container">
-                  <p className="list-title">{feedback.title}</p>
+                  <Link to={`/feedback/${feedback.id}`}>
+                    <p className="list-title">{feedback.title}</p>
+                  </Link>
                   <p className={`list-status ${feedback.status.toLowerCase()}`}>
                     {feedback.status}
                   </p>
