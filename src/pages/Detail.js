@@ -6,7 +6,10 @@ import Template from "./Template.js";
 function Detail() {
   const { id } = useParams();
   const { data, status } = qoreContext.view("allFeedback").useGetRow(id);
-  console.log(data);
+  const { comments } = qoreContext.view("commentsByFeedback").useListRow({
+    feedbackId: id, // 80f7ddc8-5b67-4833-8135-32206b518c71
+  });
+  console.log(qoreContext.view("commentsByFeedback").useListRow());
   return (
     <Template>
       <div className="detail-box">

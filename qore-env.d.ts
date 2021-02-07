@@ -9,6 +9,8 @@ declare module "@feedloop/qore-client" {
     email: string;
     role: { id: string; displayField: string };
     feedback: { nodes: FeedbackTableRow[] };
+    name: string;
+    comment1: { nodes: Comment1TableRow[] };
   };
 
   type FeedbackTableRow = {
@@ -16,10 +18,19 @@ declare module "@feedloop/qore-client" {
     title: string;
     description: string;
     vote: number;
-    createdBy: CreatedByTableRow;
     slug: string;
-    createdAt: Date;
     status: "ON PROGRESS" | "ICEBOX" | "DONE" | "TODO";
+    createdBy: CreatedByTableRow;
+    comment: { nodes: CommentTableRow[] };
+    createdAt: Date;
+  };
+
+  type CommentTableRow = {
+    id: string;
+    body: string;
+    createdAt: Date;
+    feedback: FeedbackTableRow;
+    createdBy: CreatedByTableRow;
   };
 
   type AllFeedbackViewRow = {
@@ -28,19 +39,19 @@ declare module "@feedloop/qore-client" {
       title: string;
       description: string;
       vote: number;
-      createdBy: CreatedByTableRow;
       slug: string;
-      createdAt: Date;
       status: "ON PROGRESS" | "ICEBOX" | "DONE" | "TODO";
+      createdBy: CreatedByTableRow;
+      createdAt: Date;
     };
     write: {
       title: string;
       description: string;
       vote: number;
-      createdBy: string[];
       slug: string;
-      createdAt: Date;
       status: "ON PROGRESS" | "ICEBOX" | "DONE" | "TODO";
+      createdBy: string[];
+      createdAt: Date;
     };
     params: {};
     actions: {};
@@ -51,9 +62,29 @@ declare module "@feedloop/qore-client" {
       id: string;
       email: string;
       role: { id: string; displayField: string };
+      name: string;
     };
     write: {
       email: string;
+      name: string;
+    };
+    params: {};
+    actions: {};
+  };
+
+  type AllCommentViewRow = {
+    read: {
+      id: string;
+      body: string;
+      createdAt: Date;
+      feedback: FeedbackTableRow;
+      createdBy: CreatedByTableRow;
+    };
+    write: {
+      body: string;
+      createdAt: Date;
+      feedback: string[];
+      createdBy: string[];
     };
     params: {};
     actions: {};
@@ -62,5 +93,6 @@ declare module "@feedloop/qore-client" {
   type ProjectSchema = {
     allFeedback: AllFeedbackViewRow;
     allMember: AllMemberViewRow;
+    allComment: AllCommentViewRow;
   };
 }
